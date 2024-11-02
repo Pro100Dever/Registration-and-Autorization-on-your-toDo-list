@@ -14,14 +14,20 @@ const passValidMessage = document.createElement('span')
 const changebtn = document.getElementById('loginLink')
 const logoutBtn = document.getElementById('logout-button')
 
+function getItem(name) {
+  return localStorage.getItem(name)
+    ? JSON.parse(localStorage.getItem(name))
+    : []
+}
 // Проверка. Была ли авторизация раньше
 document.addEventListener('DOMContentLoaded', () => {
   const existingUsers = localStorage.getItem('users')
     ? JSON.parse(localStorage.getItem('users'))
     : []
   const emailValue = localStorage.getItem('loggedInUser')
-    ? localStorage.getItem('loggedInUser')
-    : []
+  console.log(emailValue)
+  console.log(existingUsers)
+
   const userExist = existingUsers.some(user => user.email === emailValue)
   if (userExist) {
     form.style.display = 'none'
@@ -98,7 +104,7 @@ loginForm.addEventListener('submit', e => {
     postForm.style.display = 'block'
     container.style.display = 'flex'
     renderTasks()
-    title.textContent = 'You are logged in'
+    title.textContent = `You are logged in!\n Welcome ${emailValue}`
   } else {
     showMassageLogin('Invalid email or password', 'red')
   }
@@ -106,10 +112,11 @@ loginForm.addEventListener('submit', e => {
 // Logout
 logoutBtn.addEventListener('click', () => {
   form.style.display = 'flex'
-  text.style.display = 'unset'
+  text.style.display = 'block'
   postForm.style.display = 'none'
   container.style.display = 'none'
   logoutBtn.style.display = 'none'
+  title.innerText = `Sign up`
   localStorage.removeItem('loggedInUser')
 })
 // добавление таскс
