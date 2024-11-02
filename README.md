@@ -6,4 +6,7 @@
 
 - [HTML5](http://htmlbook.ru/html)
 - [CSS3](https://developer.mozilla.org/ru/docs/Web/CSS)
-- [JS](https://developer.mozilla.org/ru/docs/Web/JavaScript)
+- [Vanila JS](https://developer.mozilla.org/ru/docs/Web/JavaScript)
+
+### Author:
+- Берестенко Владимир (Pro100Dever)
