@@ -1,4 +1,4 @@
-# Meine erste Vanila JS cleine-project
+# Meine erste auf Vanila JS cleine-project
 ### Dabei handelt es sich um ein Registrierungs/Autorisierungsformular und eine persönliche To-Do-Liste.
 ### [My First Project](https://pro100dever.github.io/Registration-and-Autorization-on-your-toDo-list/)
 
