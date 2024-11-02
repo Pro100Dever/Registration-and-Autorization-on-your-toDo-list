@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+    <script defer src="index.js"></script>
+  </head>
+  <body>
+    <div class="signup__container">
+      <div class="signup__left">
+        <h3 class="signup__title">Sign up</h3>
+        <p class="text">Specify your email and password</p>
+        <!-- Sign up -->
+        <form class="form">
+          <div>
+            <input id="email" type="text" placeholder="email" />
+          </div>
+          <div>
+            <input id="password" type="text" placeholder="password" />
+          </div>
+          <button type="submit">Sign up</button>
+          <p>or</p>
+          <button id="loginLink" type="submit">Sign in</button>
+        </form>
+        <!-- Sign in -->
+        <form class="form" id="login-form">
+          <div>
+            <input
+              id="loginEmail"
+              type="text"
+              placeholder="email"
+              name="email"
+              required
+            />
+          </div>
+          <div>
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="password"
+              name="password"
+              required
+            />
+          </div>
+          <button type="submit">Log in</button>
+        </form>
+        <button id="logout-button" style="display: none">Logout</button>
+      </div>
+
+      <div class="img"></div>
+    </div>
+    <!-- Task list -->
+    <form class="post-form" id="post-form" style="display: none">
+      <div>
+        <input id="title" type="text" placeholder="Task" name="task" required />
+      </div>
+      <div>
+        <input
+          id="description"
+          type="text"
+          placeholder="Description"
+          name="description"
+          required
+        />
+      </div>
+      <button class="creat-btn" type="submit">Add Post</button>
+    </form>
+    <div id="container" style="display: none"></div>
+  </body>
+</html>
