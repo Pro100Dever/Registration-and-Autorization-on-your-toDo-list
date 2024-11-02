@@ -9,4 +9,4 @@
 - [Vanila JS](https://developer.mozilla.org/ru/docs/Web/JavaScript)
 
 ### Author:
-- Берестенко Владимир (Pro100Dever)
+- Volodymyr Berestenko (Pro100Dever)
