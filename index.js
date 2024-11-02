@@ -14,19 +14,10 @@ const passValidMessage = document.createElement('span')
 const changebtn = document.getElementById('loginLink')
 const logoutBtn = document.getElementById('logout-button')
 
-function getItem(name) {
-  return localStorage.getItem(name)
-    ? JSON.parse(localStorage.getItem(name))
-    : []
-}
 // Проверка. Была ли авторизация раньше
 document.addEventListener('DOMContentLoaded', () => {
-  const existingUsers = localStorage.getItem('users')
-    ? JSON.parse(localStorage.getItem('users'))
-    : []
-  const emailValue = localStorage.getItem('loggedInUser')
-  console.log(emailValue)
-  console.log(existingUsers)
+  const existingUsers = JSON.parse(getItem('users'))
+  const emailValue = getItem('loggedInUser')
 
   const userExist = existingUsers.some(user => user.email === emailValue)
   if (userExist) {
@@ -47,9 +38,7 @@ form.addEventListener('submit', e => {
   const emailValue = e.target['email'].value
   const passwordValue = e.target['password'].value
 
-  const existingUsers = localStorage.getItem('users')
-    ? JSON.parse(localStorage.getItem('users'))
-    : []
+  const existingUsers = JSON.parse(getItem('users'))
   const userExist = existingUsers.some(user => user.email === emailValue)
 
   const chekEmailValid = chekEmailValidation(e.target['email'])
@@ -90,9 +79,7 @@ loginForm.addEventListener('submit', e => {
   const emailValue = e.target['loginEmail'].value
   const passwordValue = e.target['loginPassword'].value
 
-  const existingUsers = localStorage.getItem('users')
-    ? JSON.parse(localStorage.getItem('users'))
-    : []
+  const existingUsers = JSON.parse(getItem('users'))
 
   const user = existingUsers.find(user => user.email === emailValue)
   if (user && user.password === passwordValue) {
@@ -122,8 +109,8 @@ logoutBtn.addEventListener('click', () => {
 // добавление таскс
 postForm.addEventListener('submit', e => {
   e.preventDefault()
-  let todos = JSON.parse(localStorage.getItem('users')) || []
-  const loggedEmail = localStorage.getItem('loggedInUser')
+  let todos = JSON.parse(getItem('users'))
+  const loggedEmail = getItem('loggedInUser')
 
   const titleValue = e.target['title'].value
   const descripValue = e.target['description'].value
@@ -141,8 +128,8 @@ postForm.addEventListener('submit', e => {
 
 function renderTasks() {
   container.innerHTML = ''
-  let todos = JSON.parse(localStorage.getItem('users')) || []
-  const loggedEmail = localStorage.getItem('loggedInUser')
+  let todos = JSON.parse(getItem('users'))
+  const loggedEmail = getItem('loggedInUser')
   const loggedUser = todos.find(user => user.email === loggedEmail)
 
   if (loggedUser) {
@@ -158,6 +145,12 @@ function renderTasks() {
     })
   }
 }
+
+// Достаем данные из L Storage
+function getItem(name) {
+  return localStorage.getItem(name) ? localStorage.getItem(name) : []
+}
+
 // Вывод сообщения в конце формы
 function showMassage(string, color) {
   signupMessage.innerText = string
