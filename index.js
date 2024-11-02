@@ -16,8 +16,8 @@ const logoutBtn = document.getElementById('logout-button')
 
 // Проверка. Была ли авторизация раньше
 document.addEventListener('DOMContentLoaded', () => {
-  const existingUsers = JSON.parse(getItem('users'))
-  const emailValue = getItem('loggedInUser')
+  const existingUsers = getUsersItem('users')
+  const emailValue = localStorage.getItem('loggedInUser')
 
   const userExist = existingUsers.some(user => user.email === emailValue)
   if (userExist) {
@@ -38,7 +38,7 @@ form.addEventListener('submit', e => {
   const emailValue = e.target['email'].value
   const passwordValue = e.target['password'].value
 
-  const existingUsers = JSON.parse(getItem('users'))
+  const existingUsers = getUsersItem('users')
   const userExist = existingUsers.some(user => user.email === emailValue)
 
   const chekEmailValid = chekEmailValidation(e.target['email'])
@@ -79,7 +79,7 @@ loginForm.addEventListener('submit', e => {
   const emailValue = e.target['loginEmail'].value
   const passwordValue = e.target['loginPassword'].value
 
-  const existingUsers = JSON.parse(getItem('users'))
+  const existingUsers = getUsersItem('users')
 
   const user = existingUsers.find(user => user.email === emailValue)
   if (user && user.password === passwordValue) {
@@ -109,8 +109,8 @@ logoutBtn.addEventListener('click', () => {
 // добавление таскс
 postForm.addEventListener('submit', e => {
   e.preventDefault()
-  let todos = JSON.parse(getItem('users'))
-  const loggedEmail = getItem('loggedInUser')
+  let todos = getUsersItem('users')
+  const loggedEmail = localStorage.getItem('loggedInUser')
 
   const titleValue = e.target['title'].value
   const descripValue = e.target['description'].value
@@ -128,8 +128,8 @@ postForm.addEventListener('submit', e => {
 
 function renderTasks() {
   container.innerHTML = ''
-  let todos = JSON.parse(getItem('users'))
-  const loggedEmail = getItem('loggedInUser')
+  let todos = getUsersItem('users')
+  const loggedEmail = localStorage.getItem('loggedInUser')
   const loggedUser = todos.find(user => user.email === loggedEmail)
 
   if (loggedUser) {
@@ -147,8 +147,10 @@ function renderTasks() {
 }
 
 // Достаем данные из L Storage
-function getItem(name) {
-  return localStorage.getItem(name) ? localStorage.getItem(name) : []
+function getUsersItem(name) {
+  return localStorage.getItem(name)
+    ? JSON.parse(localStorage.getItem(name))
+    : []
 }
 
 // Вывод сообщения в конце формы
@@ -170,7 +172,7 @@ function chekEmailValidation(email) {
   emailValidMessage.innerText = ''
   emailValidMessage.style.color = 'red'
   email.insertAdjacentElement('afterend', emailValidMessage)
-  const re = /^(?=.*[A-Za-z])(?=.*@)[A-Za-z0-9@]+$/
+  const re = /^(?=.*[A-Za-z])(?=.*@)[A-Za-z0-9@.]+$/
   if (email.value.length < 5) {
     emailValidMessage.innerText = 'Должно быть минимум 5 символов'
   } else if (!email.value.includes('@')) {
