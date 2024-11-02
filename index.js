@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const existingUsers = localStorage.getItem('users')
     ? JSON.parse(localStorage.getItem('users'))
     : []
-  const emailValue = localStorage.getItem('users')
+  const emailValue = localStorage.getItem('loggedInUser')
     ? localStorage.getItem('loggedInUser')
     : []
   const userExist = existingUsers.some(user => user.email === emailValue)
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.style.display = 'none'
     loginForm.style.display = 'none'
     text.style.display = 'none'
+    title.innerText = `Welcome ${emailValue}`
 
     postForm.style.display = 'block'
     container.style.display = 'flex'
